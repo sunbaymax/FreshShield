@@ -82,7 +82,7 @@
 		margin-bottom: 1rem;
 		padding: 0 1rem;
 		box-sizing: border-box;
-		height: 18rem;
+		height: auto;
 		background: #FFFFFF;
 		border-radius: 0.5rem;
 		position: relative;
@@ -213,7 +213,7 @@
 		float: none;
 		display: flex;
 		align-items: center;
-		height: 2rem;
+		height: auto;
 		padding: 0.2rem 0;
 		/*box-sizing: border-box;*/
 	}

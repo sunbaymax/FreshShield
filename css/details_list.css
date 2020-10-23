@@ -241,7 +241,7 @@ a[target=_blank]{
 }
 .history_content_ul_list li:nth-of-type(4){
 	width:12vw;
-	line-height: 2rem;
+	line-height: 4rem;
 }
 .history_content_ul_tittle li:nth-of-type(2),
 .history_content_ul_list li:nth-of-type(2)
@@ -384,7 +384,7 @@ a[target=_blank]{
 	background:blue;
 }
 .zhiShiXian span:nth-of-type(3){
-	background:red;
+	background:#F6A900;
 }
 .zhiShiXian span:nth-of-type(5){
 	background:#F6A900;
@@ -523,7 +523,7 @@ a[target=_blank]{
 }
 .details_now{
 	/*margin: 1rem 0;*/
-	height:14rem;
+	height:12rem;
 }
 .list_tittle{
 	display: flex;
