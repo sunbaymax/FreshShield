@@ -14,19 +14,33 @@
 			}
 			
 			form p {
-				width: 100%;
-				text-align: center;
-				margin-top: 2rem;
-				height: 3rem;
+				width: 70%;
+				margin-left: 15%;
+			    text-align: center;
+			    margin-top: 0rem;
+			    height: 4.6rem;
+			    display: flex;
+			    justify-content: flex-start;
+			    align-items: center;
 			}
-			
-			form p input {
-				height: 2rem;
+			form p:last-child {
+				justify-content: center;
+			}
+			form p select{
+			    width: 174px;
+			    height: 3rem;
+			}
+			form p span:first-child{
+				display: inline-block;
+				width: 84px;
+			}
+			form p input[type="text"] {
+				height: 3rem;
 				box-sizing: border-box;
 				text-align: center;
 			}
 			
-			form p:nth-of-type(5) input {
+			form p:nth-of-type(6) input {
 				/*width: 60%;
 				height: 3rem;
 				text-align: center;
@@ -65,22 +79,33 @@
 	<body>
 		<div class="header"><img class="back_list_user" src="../img/back.png" />数据下载</div>
 		<form action="">
-			<p>设备编号：<input type="text" readonly="readonly" /></p>
-			<p>开始时间：<input style="text-align: center;" type="text" id="history_start_time" onFocus="WdatePicker({startDate:'%y-%M-{%d-1} %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/></p>
-			<p>结束时间：<input style="text-align: center;" type="text" id="history_end_time" onFocus="WdatePicker({startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly /></p>
-			<p>选择格式：
+			<p><span>设备编号：</span><input type="text" /></p>
+			<p><span>开始时间：</span><input style="text-align: center;" type="text" id="history_start_time"  readonly/></p>
+			<p><span>结束时间：</span><input style="text-align: center;" type="text" id="history_end_time"  readonly /></p>
+			<p><span>选择格式：</span>
 				<select name="">
 					<option value="1">PDF格式</option>
 					<option value="2">EXCEL格式</option>
 				</select>
+				<!--是否湿度<input type="checkbox" name="sex" value="male">-->
 			</p>
+			<p>
+				<!--<select name="">
+					<option value="1">PDF格式</option>
+					<option value="2">EXCEL格式</option>
+				</select>-->
+				<span>是否湿度:</span><input type="checkbox" name="humbity" value="1" checked="checked">
+			</p>
+			
 			<p><input type="button" value="下载" /></p>
 		</form>
 		<div class="down_weixin hidden">
 			<img src="../img/down_weixin.png" />
 		</div>
 		<script src="../js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquer_shijian.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/iostime.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>-->
 		<script type="text/javascript">
 			var _url = window.location.href;
 			var _num_m = _url.match(/\?num_m=\S+&s/)[0].replace("?num_m=", "").replace("&s", "");
@@ -94,7 +119,52 @@
 //				}
               history.go(-1);
 			});
+        
+    var _endTime = new Date();
+	var _startTime = new Date(_endTime.getTime() - 24 * 60 * 60 * 1000);
+	$("#history_start_time").val(history_time(_startTime));
+	$("#history_end_time").val(history_time(_endTime));
+	var calendar = new datePicker();
+	calendar.init({
+		'trigger': '#history_start_time',
+		/*按钮选择器，用于触发弹出插件*/
+		'type': 'datetime',
+		/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+		'minDate': '1900-1-1',
+		/*最小日期*/
+		'maxDate': '2100-12-31',
+		/*最大日期*/
+		'onSubmit': function() { /*确认时触发事件*/
+			var theSelectData = calendar.value;
+		},
+		'onClose': function() { /*取消时触发事件*/ }
+	});
 
+	var calendar = new datePicker();
+	calendar.init({
+		'trigger': '#history_end_time',
+		/*按钮选择器，用于触发弹出插件*/
+		'type': 'datetime',
+		/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+		'minDate': '1900-1-1',
+		/*最小日期*/
+		'maxDate': '2100-12-31',
+		/*最大日期*/
+		'onSubmit': function() { /*确认时触发事件*/
+			var theSelectData = calendar.value;
+		},
+		'onClose': function() { /*取消时触发事件*/ }
+	});
+
+	function history_time(_a) {
+		var _start_year = _a.getFullYear();
+		var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
+		var _start_date = _a.getDate() < 10 ? "0" + (_a.getDate()) : _a.getDate();
+		var _start_hour = _a.getHours() < 10 ? "0" + (_a.getHours()) : _a.getHours();
+		var _start_minutes = _a.getMinutes() < 10 ? "0" + (_a.getMinutes()) : _a.getMinutes();
+		var _start_seconds = _a.getSeconds() < 10 ? "0" + (_a.getSeconds()) : _a.getSeconds();
+		return _start_year + "-" + _start_month + "-" + _start_date + " " + _start_hour + ":" + _start_minutes + ":" + _start_seconds;
+	}
         function history_time(_a) {
             var _start_year = _a.getFullYear();
             var _start_month = _a.getMonth() + 1 < 10 ? "0" + (_a.getMonth() + 1) : _a.getMonth() + 1;
@@ -112,7 +182,7 @@
 			$(".down_weixin img").on("click", function() {
 				$(".down_weixin").addClass("hidden");
 			})
-			$("p:nth-of-type(5) input").on("click", function() {
+			$("input[type='button']").on("click", function() {
 				var ua = navigator.userAgent;
 				var isWeixin = !!/MicroMessenger/i.test(ua);
 				if(isWeixin) {
@@ -124,7 +194,11 @@
 					var _geshi = $("p:nth-of-type(4) select").val();
 					//console.log(_geshi);
 					if(_geshi == 1) {
-						window.location.href = "http://www.ccsc58.com/tcpdf/pdf/pdf_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
+						let ischoose=$("input[type='checkbox']").is(':checked')==true?'1':'0' 
+						//window.location.href = "http://www.ccsc58.com/tcpdf/pdf/pdf_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time+ "&t2=" + _end_time;
+						//"http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/import_pdf?shebeibianma="+_machine_number+"&t1="+_start_time+"&t2="+_end_time+"&showShidu=1&hanzi=1";
+						let surl='http://www.ccsc58.cc/wlgl/Admin/Humiture/downloadPDF/s/'+_machine_number+'/t1/'+_start_time+'/t2/'+_end_time+'/hanzi/1/total/2000/showShidu/'+ischoose
+						window.location.href = surl
 					} else if(_geshi == 2) {
 						window.location.href = "http://www.ccsc58.com/PHPExcel/PHPExcel/xls_out.php?s=" + _machine_number + "&t1=" + _start_time + "&t2=" + _end_time;
 					}

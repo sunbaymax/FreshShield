@@ -75,10 +75,10 @@
 				$(".btnok button").attr('disabled', false);
 			}
 			//http://www.ccsc58.com/json/06_00_tb_device_chanshu.php
-			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param
+			//http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param
 			$.ajax({
 				type: "post",
-				url: 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_device_param',
+				url: 'http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_device_param',
 				data: {
 					admin_permit: "zjly8888",
 					UserP: "w",
@@ -86,7 +86,8 @@
 					admin_user: _userName,
 					admin_pass: _userPass,
 					SheBeiBianHao: _num_m,
-					openid: copenid
+					openid: copenid,
+					userType:utype
 				},
 				success: function(data) {
 					var _json = JSON.parse(data);
@@ -167,14 +168,15 @@
 					var _yejianshangchuankaiguan = $(".shebeihao").attr('yejian');
 					$.ajax({
 						type: "post",
-						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/update_device",
+						url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_update_device",
 						data: {
 							devid: _num_m,
 							beizhu: bieming,
 							GPS_Start: _GPS_Start,
 							yejianshangchuankaiguan: _yejianshangchuankaiguan,
 							sort:_sort,
-							openid:copenid
+							openid:copenid,
+							userType:utype
 						},
 						dataType: "JSON",
 						success: function(res) {

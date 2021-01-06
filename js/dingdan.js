@@ -105,7 +105,7 @@ $(document).ready(function() {
 						 str=`<div class="dingdan_content">
 			<p class="title"><a href='${href}' class='yundannum'>${value.danhao}</a><span class="yundanstate">${_state}</span></p>
 			<p class="standline"><img src="../images/danhao.png" class="standard_img" />业务单号：<span>${value.yewudanhao}</span></p>
-			<p class="standline"><img src="../images/shangpin.png" class="standard_img" />药品名称：<span>${value.pinming}/${value.yaopinshuliang}</span> </p>
+			<p class="standline"><img src="../images/shangpin.png" class="standard_img" />货物名称：<span>${value.pinming}/${value.yaopinshuliang}</span> </p>
 			<p class="standline"><img src="../images/shijian.png" class="standard_img" />订单时间：<span>${value.createtime}</span></p>
 		</div>`;
 						$('.content').append(str);

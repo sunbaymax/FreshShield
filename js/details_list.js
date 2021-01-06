@@ -30,6 +30,7 @@
 	var _userName = userinfo.user;
 	var _userPass = userinfo.pwd;
 	var copenid = userinfo.copenid == undefined ? '' : userinfo.copenid;
+	let userType=userinfo.userType;
 
 	/*
 	 * 顶部导航栏点击后实现下面网页切换效果；
@@ -278,7 +279,7 @@
 	//获取页面当前时间；
 	//http://www.ccsc58.com/json/xiandun_history_data.php http://www.ccsc58.com/json/01_00_tb_history_data.php
 	$.ajax({
-		url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/get_history_data",
+		url: "http://www.zjcoldcloud.com/xiandun/public/index.php/index/device/xiandun_get_history_data",
 		type: "post",
 		data: {
 			UserP:"w",
@@ -290,7 +291,8 @@
 			Length:20,
 			admin_user:_userName,
 			admin_pass:_userPass,
-			openid:copenid
+			openid:copenid,
+			userType
 		},
 		success: function(data) {
 			var _json = JSON.parse(data);
